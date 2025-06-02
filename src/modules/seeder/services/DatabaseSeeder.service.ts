@@ -11,7 +11,7 @@ export class DatabaseSeeder {
   ) {}
 
   async execute() {
-    for (const _i of Array.from({ length: 5 })) {
+    for (const _i of Array.from({ length: 50 })) {
       const customersBody = {
         name: faker.person.firstName(),
         email: faker.internet.email(),
@@ -26,8 +26,8 @@ export class DatabaseSeeder {
       });
 
       await this.customersRepository.create(customer);
-
-      console.log('customer is created');
     }
+
+    console.log('50 customers is created');
   }
 }
