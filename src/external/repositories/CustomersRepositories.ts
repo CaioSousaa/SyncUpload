@@ -10,18 +10,8 @@ export class CustomerRepository implements ICustomerPortRepository {
     private customersRepository: Repository<Customers>,
   ) {}
 
-  async create({ age, email, name }: Customer): Promise<Customer> {
-    const newCustomer = {
-      age,
-      email,
-      name,
-      created_at: new Date(),
-    };
-
-    const customers = this.customersRepository.create(newCustomer);
-
-    const createdCustomer = await this.customersRepository.save(customers);
-
-    return createdCustomer;
+  async create(customer: Customer[]): Promise<void> {
+    const customers = this.customersRepository.create(customer);
+    await this.customersRepository.save(customers);
   }
 }

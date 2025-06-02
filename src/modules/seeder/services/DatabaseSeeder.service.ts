@@ -11,23 +11,24 @@ export class DatabaseSeeder {
   ) {}
 
   async execute() {
-    for (const _i of Array.from({ length: 10000 })) {
-      const customersBody = {
+    const batchSize = 1000;
+    const customersInserts = 50000;
+    const allCustomers: Customer[] = [];
+
+    for (let i = 0; i < customersInserts; i++) {
+      allCustomers.push({
         name: faker.person.firstName(),
         email: faker.internet.email(),
         age: faker.number.int({ min: 18, max: 80 }),
-      };
-
-      const customer = Customer.create({
-        name: customersBody.name,
-        email: customersBody.email,
-        age: customersBody.age,
         created_at: new Date(),
       });
-
-      await this.customersRepository.create(customer);
     }
 
-    console.log('10k customers is created');
+    for (let i = 0; i < allCustomers.length; i += batchSize) {
+      const batch = allCustomers.slice(i, i + batchSize);
+      await this.customersRepository.create(batch);
+    }
+
+    console.log('50k customers created in batches');
   }
 }
