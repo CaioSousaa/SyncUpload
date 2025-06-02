@@ -12,7 +12,7 @@ export class DatabaseSeeder {
 
   async execute() {
     const batchSize = 1000;
-    const customersInserts = 50000;
+    const customersInserts = 100000;
     const allCustomers: Customer[] = [];
 
     for (let i = 0; i < customersInserts; i++) {
