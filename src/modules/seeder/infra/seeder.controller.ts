@@ -10,7 +10,7 @@ export class SeederControler {
     try {
       return await this.seederService.execute();
     } finally {
-      console.log('One Customer created!');
+      console.log('Five Customers created!');
     }
   }
 }

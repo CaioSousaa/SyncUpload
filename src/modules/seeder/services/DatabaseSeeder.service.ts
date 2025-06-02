@@ -11,23 +11,23 @@ export class DatabaseSeeder {
   ) {}
 
   async execute() {
-    const customersBody = {
-      name: faker.person.firstName(),
-      email: faker.internet.email(),
-      age: faker.number.int({ min: 18, max: 80 }),
-    };
+    for (const _i of Array.from({ length: 5 })) {
+      const customersBody = {
+        name: faker.person.firstName(),
+        email: faker.internet.email(),
+        age: faker.number.int({ min: 18, max: 80 }),
+      };
 
-    const oneCustomerTest = Customer.create({
-      name: customersBody.name,
-      email: customersBody.email,
-      age: customersBody.age,
-      created_at: new Date(),
-    });
+      const customer = Customer.create({
+        name: customersBody.name,
+        email: customersBody.email,
+        age: customersBody.age,
+        created_at: new Date(),
+      });
 
-    console.log('oneCustomerTest', oneCustomerTest);
+      await this.customersRepository.create(customer);
 
-    const customer = await this.customersRepository.create(oneCustomerTest);
-
-    return customer;
+      console.log('customer is created');
+    }
   }
 }
