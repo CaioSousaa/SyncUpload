@@ -22,7 +22,6 @@ export class CustomerRepository implements ICustomerPortRepository {
 
     const createdCustomer = await this.customersRepository.save(customers);
 
-    console.log('pingou aqui', createdCustomer);
     return createdCustomer;
   }
 }
