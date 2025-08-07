@@ -1,6 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { Customer } from 'src/modules/seeder/domain/entities/Customer';
-import { Customers } from 'src/modules/seeder/infra/http/typeorm/entities/Customers';
+import { Customers } from 'src/modules/seeder/infra/typeorm/entities/Customers';
 import { ICustomerPortRepository } from 'src/modules/seeder/ports/IPortCustomer';
 import { Repository } from 'typeorm';
 
