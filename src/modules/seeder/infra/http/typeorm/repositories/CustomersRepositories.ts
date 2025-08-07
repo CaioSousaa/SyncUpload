@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
-import { Customers } from 'src/database/tables/Customers';
 import { Customer } from 'src/modules/seeder/domain/entities/Customer';
 import { ICustomerPortRepository } from 'src/modules/seeder/ports/IPortCustomer';
 import { Repository } from 'typeorm';
+import { Customers } from '../entities/Customers';
 
 export class CustomerRepository implements ICustomerPortRepository {
   constructor(

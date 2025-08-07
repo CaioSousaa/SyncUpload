@@ -2,7 +2,8 @@ import { Inject } from '@nestjs/common';
 import { Customer } from '../domain/entities/Customer';
 import { ICustomerPortRepository } from '../ports/IPortCustomer';
 import { faker } from '@faker-js/faker';
-import { CustomerRepository } from 'src/external/repositories/CustomersRepositories';
+import { CustomerRepository } from 'src/modules/seeder/infra/http/typeorm/repositories/CustomersRepositories';
+import { AppResponse } from 'src/adapters/responses/AppResponse';
 
 export class DatabaseSeeder {
   constructor(
@@ -10,7 +11,7 @@ export class DatabaseSeeder {
     private readonly customersRepository: ICustomerPortRepository,
   ) {}
 
-  async execute() {
+  async execute(): Promise<AppResponse> {
     const batchSize = 1000;
     const customersInserts = 100000;
     const allCustomers: Customer[] = [];
@@ -29,6 +30,6 @@ export class DatabaseSeeder {
       await this.customersRepository.create(batch);
     }
 
-    console.log('50k customers created in batches');
+    return new AppResponse('success');
   }
 }

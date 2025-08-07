@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
-import { Customers } from 'src/database/tables/Customers';
-import { IPortCSV } from 'src/modules/ports/IPortCSV';
+import { IPortCSV } from 'src/modules/csv/ports/IPortCSV';
 import { Customer } from 'src/modules/seeder/domain/entities/Customer';
+import { Customers } from 'src/modules/seeder/infra/http/typeorm/entities/Customers';
 import { Repository } from 'typeorm';
 
 export class CSVRepository implements IPortCSV {

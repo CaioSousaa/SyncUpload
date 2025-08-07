@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
-import { Customers } from '../../database/tables/Customers';
-import { DuplicateCustomers } from 'src/database/tables/DuplicateCustomers';
+import { Customers } from './infra/http/typeorm/entities/Customers';
+import { DuplicateCustomers } from './infra/http/typeorm/entities/DuplicateCustomers';
 
 export const customersProvider = [
   {

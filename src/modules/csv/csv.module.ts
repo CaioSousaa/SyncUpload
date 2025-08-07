@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CSVController } from '../infra/http/csv.controller';
+import { CSVController } from './infra/http/controller/csv.controller';
 import { ExportDatabaseToCSVService } from './services/ExportDatabaseToCSV.service';
-import { CSVRepository } from 'src/external/repositories/CSVRepositories';
+import { CSVRepository } from 'src/modules/csv/infra/typeorm/repositories/CSVRepositories';
 import { customersProvider } from '../seeder/constants.provider';
-import { DatabaseModule } from 'src/database/database.module';
+import { DatabaseModule } from 'src/infra/database/database.module';
 
 @Module({
   imports: [DatabaseModule],

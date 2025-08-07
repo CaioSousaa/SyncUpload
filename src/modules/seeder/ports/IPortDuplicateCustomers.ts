@@ -1,4 +1,4 @@
-import { DuplicateCustomers } from 'src/database/tables/DuplicateCustomers';
+import { DuplicateCustomers } from '../infra/http/typeorm/entities/DuplicateCustomers';
 
 export interface IDuplicateCustomersPortRepository {
   create(duplicateCustomers: DuplicateCustomers): Promise<DuplicateCustomers>;
