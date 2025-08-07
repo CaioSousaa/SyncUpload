@@ -20,7 +20,7 @@ export class ExportDatabaseToCSVService {
 
     const customers = await this.csvRepository.findMany();
 
-    if (!customers) {
+    if (customers.length === 0) {
       throw new NotAcceptableException(
         'there are no customers in the database',
       );
