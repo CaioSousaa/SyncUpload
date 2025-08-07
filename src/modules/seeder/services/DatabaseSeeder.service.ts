@@ -2,8 +2,8 @@ import { Inject } from '@nestjs/common';
 import { Customer } from '../domain/entities/Customer';
 import { ICustomerPortRepository } from '../ports/IPortCustomer';
 import { faker } from '@faker-js/faker';
-import { CustomerRepository } from 'src/modules/seeder/infra/http/typeorm/repositories/CustomersRepositories';
-import { AppResponse } from 'src/adapters/responses/AppResponse';
+import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepositories';
+import { AppResponse } from '../../../adapters/responses/AppResponse';
 
 export class DatabaseSeeder {
   constructor(
@@ -15,6 +15,7 @@ export class DatabaseSeeder {
     const batchSize = 1000;
     const customersInserts = 100000;
     const allCustomers: Customer[] = [];
+    let length = 0;
 
     for (let i = 0; i < customersInserts; i++) {
       allCustomers.push({
@@ -30,6 +31,8 @@ export class DatabaseSeeder {
       await this.customersRepository.create(batch);
     }
 
-    return new AppResponse('success');
+    length = allCustomers.length;
+
+    return new AppResponse('success', 200, length);
   }
 }
