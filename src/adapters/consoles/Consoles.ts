@@ -3,5 +3,5 @@ export const ServerConsole = () => {
 };
 
 export const SwaggerConsole = () => {
-  return console.log('swagger in local http://localhost:3333/api 📗');
+  return console.log('swagger is run in http://localhost:3333/api 📗');
 };
