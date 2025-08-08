@@ -2,12 +2,14 @@ import { Inject, Injectable, NotAcceptableException } from '@nestjs/common';
 import { IPortCSV } from 'src/modules/csv/ports/IPortCSV';
 import { createObjectCsvWriter } from 'csv-writer';
 import path from 'path';
-import { CSVRepository } from 'src/modules/csv/infra/typeorm/repositories/CSVRepositories';
 import { AppResponse } from 'src/adapters/responses/AppResponse';
+import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepositories';
 
 @Injectable()
 export class ExportDatabaseToCSVService {
-  constructor(@Inject(CSVRepository) private csvRepository: IPortCSV) {}
+  constructor(
+    @Inject(CustomerRepository) private CustomerRepository: IPortCSV,
+  ) {}
 
   async execute(): Promise<AppResponse> {
     const header = [
@@ -18,7 +20,7 @@ export class ExportDatabaseToCSVService {
       { id: 'created_at', title: 'Created_at' },
     ];
 
-    const customers = await this.csvRepository.findMany();
+    const customers = await this.CustomerRepository.findMany();
 
     if (customers.length === 0) {
       throw new NotAcceptableException(
