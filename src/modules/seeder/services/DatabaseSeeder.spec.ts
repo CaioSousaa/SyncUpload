@@ -3,7 +3,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepositories';
 import { databaseSeederMock } from '../mocks/DatabaseSeederMock';
 import { afterEach } from 'node:test';
-import { faker } from '@faker-js/faker';
 import { Customer } from '../domain/entities/Customer';
 import { AppResponse } from 'src/adapters/responses/AppResponse';
 

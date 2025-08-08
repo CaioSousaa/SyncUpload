@@ -14,4 +14,10 @@ export class CustomerRepository implements ICustomerPortRepository {
     const customers = this.customersRepository.create(customer);
     await this.customersRepository.save(customers);
   }
+
+  async findMany(): Promise<Customer[]> {
+    const allCustomers = await this.customersRepository.find();
+
+    return allCustomers;
+  }
 }
