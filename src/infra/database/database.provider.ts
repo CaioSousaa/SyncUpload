@@ -1,7 +1,7 @@
 import 'dotenv';
+import { Customers } from 'src/modules/seeder/infra/typeorm/entities/Customers';
+import { DuplicateCustomers } from 'src/modules/seeder/infra/typeorm/entities/DuplicateCustomers';
 import { DataSource } from 'typeorm';
-import { Customers } from './tables/Customers';
-import { DuplicateCustomers } from './tables/DuplicateCustomers';
 
 export const databaseProviders = [
   {

@@ -1,14 +1,17 @@
 import { Inject, Injectable, NotAcceptableException } from '@nestjs/common';
-import { IPortCSV } from 'src/modules/ports/IPortCSV';
+import { IPortCSV } from 'src/modules/csv/ports/IPortCSV';
 import { createObjectCsvWriter } from 'csv-writer';
 import path from 'path';
-import { CSVRepository } from 'src/external/repositories/CSVRepositories';
+import { AppResponse } from 'src/adapters/responses/AppResponse';
+import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepositories';
 
 @Injectable()
 export class ExportDatabaseToCSVService {
-  constructor(@Inject(CSVRepository) private csvRepository: IPortCSV) {}
+  constructor(
+    @Inject(CustomerRepository) private CustomerRepository: IPortCSV,
+  ) {}
 
-  async execute() {
+  async execute(): Promise<AppResponse> {
     const header = [
       { id: 'id', title: 'ID' },
       { id: 'name', title: 'Name' },
@@ -17,9 +20,9 @@ export class ExportDatabaseToCSVService {
       { id: 'created_at', title: 'Created_at' },
     ];
 
-    const customers = await this.csvRepository.findMany();
+    const customers = await this.CustomerRepository.findMany();
 
-    if (!customers) {
+    if (customers.length === 0) {
       throw new NotAcceptableException(
         'there are no customers in the database',
       );
@@ -38,5 +41,7 @@ export class ExportDatabaseToCSVService {
       .catch((error) => {
         console.log('Error', error);
       });
+
+    return new AppResponse('success');
   }
 }

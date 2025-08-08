@@ -1,8 +1,10 @@
-import { Inject } from '@nestjs/common';
+import { BadRequestException, Inject } from '@nestjs/common';
 import { Customer } from '../domain/entities/Customer';
 import { ICustomerPortRepository } from '../ports/IPortCustomer';
 import { faker } from '@faker-js/faker';
-import { CustomerRepository } from 'src/external/repositories/CustomersRepositories';
+import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepositories';
+import { AppResponse } from '../../../adapters/responses/AppResponse';
+import { DatabaseSeederDTO } from '../dto/DatabaseSeederDTO';
 
 export class DatabaseSeeder {
   constructor(
@@ -10,12 +12,17 @@ export class DatabaseSeeder {
     private readonly customersRepository: ICustomerPortRepository,
   ) {}
 
-  async execute() {
-    const batchSize = 1000;
-    const customersInserts = 100000;
+  async execute({ insertionsSize }: DatabaseSeederDTO): Promise<AppResponse> {
+    let batchSize = 1000;
     const allCustomers: Customer[] = [];
 
-    for (let i = 0; i < customersInserts; i++) {
+    if (!insertionsSize) {
+      throw new BadRequestException('the insertions size field is mandatory');
+    }
+
+    if (insertionsSize < 1000) batchSize = insertionsSize;
+
+    for (let i = 0; i < insertionsSize; i++) {
       allCustomers.push({
         name: faker.person.firstName(),
         email: faker.internet.email(),
@@ -29,6 +36,6 @@ export class DatabaseSeeder {
       await this.customersRepository.create(batch);
     }
 
-    console.log('50k customers created in batches');
+    return new AppResponse('success', 200, allCustomers.length);
   }
 }

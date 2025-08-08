@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from 'src/database/database.module';
+import { DatabaseModule } from 'src/infra/database/database.module';
 import { customersProvider } from './constants.provider';
 import { DatabaseSeeder } from './services/DatabaseSeeder.service';
-import { SeederControler } from './infra/seeder.controller';
-import { CustomerRepository } from 'src/external/repositories/CustomersRepositories';
+import { SeederControler } from './infra/http/controller/seeder.controller';
+import { CustomerRepository } from './infra/typeorm/repositories/CustomersRepositories';
 
 @Module({
   imports: [DatabaseModule],
