@@ -1,7 +1,7 @@
 import { BadRequestException, Inject } from '@nestjs/common';
 import { Customer } from '../domain/entities/Customer';
 import { ICustomerPortRepository } from '../ports/IPortCustomer';
-import { faker } from '@faker-js/faker';
+import { faker, fakerPT_BR } from '@faker-js/faker';
 import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepositories';
 import { AppResponse } from '../../../adapters/responses/AppResponse';
 import { DatabaseSeederDTO } from '../dto/DatabaseSeederDTO';
@@ -24,9 +24,13 @@ export class DatabaseSeeder {
 
     for (let i = 0; i < insertionsSize; i++) {
       allCustomers.push({
-        name: faker.person.firstName(),
+        name: fakerPT_BR.person.firstName(),
         email: faker.internet.email(),
         age: faker.number.int({ min: 18, max: 80 }),
+        city: `${fakerPT_BR.location.city()}-${fakerPT_BR.location.state({ abbreviated: true })}`,
+        job: `${fakerPT_BR.person.jobType()}-${faker.helpers.arrayElement(['Júnior', 'Pleno', 'Sênior', 'Especialista'])}`,
+        salary_in_cents: faker.number.int({ min: 120000, max: 1000000 }),
+        cpf: fakerPT_BR.string.numeric('###.###.###-##'),
         created_at: new Date(),
       });
     }
