@@ -1,6 +1,5 @@
 import 'dotenv';
 import { Customers } from 'src/modules/seeder/infra/typeorm/entities/Customers';
-import { DuplicateCustomers } from 'src/modules/seeder/infra/typeorm/entities/DuplicateCustomers';
 import { DataSource } from 'typeorm';
 
 export const databaseProviders = [
@@ -14,7 +13,7 @@ export const databaseProviders = [
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        entities: [Customers, DuplicateCustomers],
+        entities: [Customers],
         synchronize: true,
       });
 

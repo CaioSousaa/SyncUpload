@@ -16,5 +16,17 @@ export class Customers {
   age: number;
 
   @Column()
+  city: string;
+
+  @Column()
+  job: string;
+
+  @Column()
+  salary_in_cents: number;
+
+  @Column()
+  cpf: string;
+
+  @Column()
   created_at: Date;
 }
