@@ -1,5 +1,7 @@
 import 'dotenv';
+import { Location } from 'src/modules/location/infra/http/typeorm/entities/Location';
 import { Customers } from 'src/modules/seeder/infra/typeorm/entities/Customers';
+import { ExportTrigger } from 'src/modules/seeder/infra/typeorm/entities/ExportTrigger';
 import { DataSource } from 'typeorm';
 
 export const databaseProviders = [
@@ -13,7 +15,7 @@ export const databaseProviders = [
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        entities: [Customers],
+        entities: [Customers, ExportTrigger, Location],
         synchronize: true,
       });
 

@@ -1,13 +1,22 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from 'src/infra/database/database.module';
-import { customersProvider } from './constants.provider';
+import { customersProvider, exportTriggerProvider } from './constants.provider';
 import { DatabaseSeeder } from './services/DatabaseSeeder.service';
 import { SeederControler } from './infra/http/controller/seeder.controller';
-import { CustomerRepository } from './infra/typeorm/repositories/CustomersRepositories';
+import { CustomerRepository } from './infra/typeorm/repositories/CustomersRepository';
+import { ExportTriggerRepository } from './infra/typeorm/repositories/ExportTriggerRepository';
+import { ExportDatabaseToCSVService } from '../csv/services/ExportDatabaseToCSV.service';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [SeederControler],
-  providers: [...customersProvider, DatabaseSeeder, CustomerRepository],
+  providers: [
+    ...customersProvider,
+    ...exportTriggerProvider,
+    DatabaseSeeder,
+    CustomerRepository,
+    ExportTriggerRepository,
+    ExportDatabaseToCSVService,
+  ],
 })
 export class SeederModule {}
