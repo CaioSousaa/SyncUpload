@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Customers } from './infra/typeorm/entities/Customers';
-import { DuplicateCustomers } from './infra/typeorm/entities/DuplicateCustomers';
+import { ExportTrigger } from './infra/typeorm/entities/ExportTrigger';
 
 export const customersProvider = [
   {
@@ -10,11 +10,11 @@ export const customersProvider = [
   },
 ];
 
-export const duplicateCustomersProvider = [
+export const exportTriggerProvider = [
   {
-    provide: 'DUPLICATE_CUSTOMERS_REPOSITORY',
+    provide: 'EXPORT_TRIGGERS_REPOSITORY',
     useFactory: (dataSource: DataSource) =>
-      dataSource.getRepository(DuplicateCustomers),
+      dataSource.getRepository(ExportTrigger),
     inject: ['DATA_SOURCE'],
   },
 ];

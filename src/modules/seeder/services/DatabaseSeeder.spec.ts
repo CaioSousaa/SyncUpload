@@ -1,6 +1,6 @@
 import { DatabaseSeeder } from './DatabaseSeeder.service';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepositories';
+import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepository';
 import { databaseSeederMock } from '../mocks/DatabaseSeederMock';
 import { afterEach } from 'node:test';
 import { Customer } from '../domain/entities/Customer';
