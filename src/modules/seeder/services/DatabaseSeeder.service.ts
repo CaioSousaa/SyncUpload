@@ -11,6 +11,7 @@ import { AppResponse } from '../../../adapters/responses/AppResponse';
 import { DatabaseSeederDTO } from '../dto/DatabaseSeederDTO';
 import { ExportTriggerRepository } from '../infra/typeorm/repositories/ExportTriggerRepository';
 import { IPortExportTrigger } from '../ports/IPortExportTrigger';
+import { ExportDatabaseToCSVService } from 'src/modules/csv/services/ExportDatabaseToCSV.service';
 
 export class DatabaseSeeder {
   constructor(
@@ -18,6 +19,7 @@ export class DatabaseSeeder {
     private readonly customersRepository: ICustomerPortRepository,
     @Inject(ExportTriggerRepository)
     private readonly exportTriggerRepository: IPortExportTrigger,
+    private exportDatabaseToCSVService: ExportDatabaseToCSVService,
   ) {}
 
   async execute({ insertionsSize }: DatabaseSeederDTO): Promise<AppResponse> {
@@ -50,8 +52,15 @@ export class DatabaseSeeder {
       }
 
       await this.exportTriggerRepository.update(true);
+      const exportResponse = await this.exportDatabaseToCSVService.execute();
 
-      return new AppResponse('success', 200, allCustomers.length);
+      return new AppResponse(
+        'success',
+        200,
+        allCustomers.length,
+        exportResponse.fileUrl,
+        exportResponse.fileName,
+      );
     } catch (error) {
       console.error('Error seeding database:', error);
       if (error instanceof BadRequestException) {

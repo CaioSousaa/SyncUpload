@@ -5,6 +5,7 @@ import { DatabaseSeeder } from './services/DatabaseSeeder.service';
 import { SeederControler } from './infra/http/controller/seeder.controller';
 import { CustomerRepository } from './infra/typeorm/repositories/CustomersRepository';
 import { ExportTriggerRepository } from './infra/typeorm/repositories/ExportTriggerRepository';
+import { ExportDatabaseToCSVService } from '../csv/services/ExportDatabaseToCSV.service';
 
 @Module({
   imports: [DatabaseModule],
@@ -15,6 +16,7 @@ import { ExportTriggerRepository } from './infra/typeorm/repositories/ExportTrig
     DatabaseSeeder,
     CustomerRepository,
     ExportTriggerRepository,
+    ExportDatabaseToCSVService,
   ],
 })
 export class SeederModule {}

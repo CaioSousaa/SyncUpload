@@ -9,7 +9,7 @@ export class ExportTriggerRepository implements IPortExportTrigger {
     private exportTriggerRepository: Repository<ExportTrigger>,
   ) {}
 
-  async update(mode: boolean): Promise<void> {
+  public async update(mode: boolean): Promise<void> {
     const sql =
       'SELECT id, active, updated_at FROM export_trigger WHERE id = $1';
     const exportTriggerIsExists = await this.exportTriggerRepository.query(

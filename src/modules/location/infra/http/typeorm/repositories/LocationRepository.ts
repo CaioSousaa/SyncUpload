@@ -9,13 +9,13 @@ export class LocationRepository implements IPortLocation {
     private locationRepository: Repository<Location>,
   ) {}
 
-  async findMany(): Promise<Location[]> {
+  public async findMany(): Promise<Location[]> {
     const locations = await this.locationRepository.find();
 
     return locations;
   }
 
-  async create({
+  public async create({
     acronym,
     id,
     regionName,
