@@ -20,8 +20,7 @@ SyncUpload é uma API desenvolvida em NestJS para manipulação, armazenamento e
 1. **Clone o repositório**
 
    ```sh
-   git clone https://github.com/seu-usuario/sync-upload.git
-   cd sync-upload
+   git clone https://github.com/seu-usuario/sync-upload.git](https://github.com/CaioSousaa/SyncUpload.git
    ```
 
 2. **Instale as dependências**
