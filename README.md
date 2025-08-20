@@ -33,25 +33,19 @@ SyncUpload é uma API desenvolvida em NestJS para manipulação, armazenamento e
 
    - Copie o arquivo `.env.example` para `.env` e ajuste as configurações do banco de dados conforme necessário.
 
-4. **(Opcional) Suba o banco de dados com Docker**
+4. **Suba o banco de dados com Docker**
 
    ```sh
    docker-compose up -d
    ```
 
-5. **Rode as migrations (se houver)**
-
-   ```sh
-   yarn typeorm migration:run
-   ```
-
-6. **Inicie a aplicação**
+5. **Inicie a aplicação**
 
    ```sh
    yarn start:dev
    ```
 
-7. **Acesse a documentação**
+6. **Acesse a documentação**
    - Acesse [http://localhost:3333/api](http://localhost:3333/api) para visualizar a documentação Swagger dos endpoints.
 
 ---
